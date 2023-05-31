@@ -1,14 +1,12 @@
-const express = require('express')
-const router = express.Router()
-const usersController = require('../controllers/usersController')
-const verifyJWT = require('../middleware/verifyJWT')
+const express = require('express');
+const router = express.Router();
+const usersController = require('../controllers/usersController');
+const verifyJWT = require('../middleware/verifyJWT');
 
-router.use(verifyJWT)
+// Apply verifyJWT middleware to all routes except createNewUser
+router.get('/', verifyJWT, usersController.getAllUsers);
+router.patch('/', verifyJWT, usersController.updateUser);
+router.delete('/', verifyJWT, usersController.deleteUser);
+router.post('/', usersController.createNewUser);
 
-router.route('/')
-    .get(usersController.getAllUsers)
-    .post(usersController.createNewUser)
-    .patch(usersController.updateUser)
-    .delete(usersController.deleteUser)
-
-module.exports = router
+module.exports = router;
