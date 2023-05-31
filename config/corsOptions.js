@@ -1,8 +1,6 @@
-const allowedOrigins = [
-    'https://your-react-app-domain.com'
-  ];
-  
-  const corsOptions = {
+const allowedOrigins = require('./allowedOrigins')
+
+const corsOptions = {
     origin: (origin, callback) => {
       if (allowedOrigins.includes(origin) || !origin) {
         callback(null, true);
@@ -15,4 +13,3 @@ const allowedOrigins = [
   };
   
   module.exports = corsOptions;
-  
