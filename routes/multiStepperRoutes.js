@@ -6,6 +6,6 @@ const upload = require('../multerConfig');
 
 
 router.post('/', verifyJWT, upload.fields([{ name: 'examIcon', maxCount: 1 }, { name: 'testIcon', maxCount: 1 }]), mockController.createMockDetails);
-router.get('/', mockController.getAllMockDetails);
+router.get('/',verifyJWT, mockController.getAllMockDetails);
 
 module.exports = router;
