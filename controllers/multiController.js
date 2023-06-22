@@ -4,8 +4,7 @@ const Exam = require("../models/ExamCategory");
 const Phases = require("../models/ExamPhases");
 const Test = require("../models/TestChoices");
 const Section = require("../models/SectionSchema");
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const MockDetail = require("../models/MockDetails");
 
 const createMockDetails = async (req, res) => {
   try {
@@ -26,7 +25,7 @@ const createMockDetails = async (req, res) => {
       populate: {
         path: "phases",
         populate: {
-          path: "sections",
+          path: "uniqueSectionID",
         },
       },
     });
@@ -96,4 +95,28 @@ const createMockDetails = async (req, res) => {
   }
 };
 
-module.exports = { createMockDetails };
+
+
+const getAllMockDetails = async (req, res) => {
+  try {
+    const exams = await Exam.find({})
+      .populate({
+        path: "tests",
+        populate: {
+          path: "phases",
+          populate: {
+            path: "uniqueSectionID",
+          },
+        },
+      });
+
+    
+    res.status(200).json({ exams });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to retrieve mock details" });
+  }
+};
+
+
+module.exports = { createMockDetails, getAllMockDetails };

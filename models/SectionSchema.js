@@ -27,10 +27,9 @@
 
 
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
 
-const sectionSchema = new Schema({
+const sectionSchema = new mongoose.Schema({
   sections: [{
     name: {
       type: String,

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
 
-const examCategorySchema = new Schema({
+const examCategorySchema = new mongoose.Schema({
   examType: {
     type: String,
     required: true,
@@ -12,7 +11,7 @@ const examCategorySchema = new Schema({
   },
   tests: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "TestChoices",
     },
   ],

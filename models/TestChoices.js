@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
 
-const testChoicesSchema = new Schema({
+const testChoicesSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -12,7 +11,7 @@ const testChoicesSchema = new Schema({
   },
   phases: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "ExamPhases",
     },
   ],

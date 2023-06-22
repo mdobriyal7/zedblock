@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
 
-const examPhasesSchema = new Schema({
+const examPhasesSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
   uniqueSectionID: {  // Change from sectionArray to section
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "SectionArray",
   },
 }).set('strictPopulate', false);
