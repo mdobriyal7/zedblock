@@ -4,7 +4,6 @@ const Exam = require("../models/ExamCategory");
 const Phases = require("../models/ExamPhases");
 const Test = require("../models/TestChoices");
 const Section = require("../models/SectionSchema");
-const MockDetail = require("../models/MockDetails");
 
 const createMockDetails = async (req, res) => {
   try {
