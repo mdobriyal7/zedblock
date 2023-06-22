@@ -94,28 +94,23 @@ const createMockDetails = async (req, res) => {
   }
 };
 
-
-
 const getAllMockDetails = async (req, res) => {
   try {
-    const exams = await Exam.find({})
-      .populate({
-        path: "tests",
+    const exams = await Exam.find({}).populate({
+      path: "tests",
+      populate: {
+        path: "phases",
         populate: {
-          path: "phases",
-          populate: {
-            path: "uniqueSectionID",
-          },
+          path: "uniqueSectionID",
         },
-      });
+      },
+    });
 
-    
-    res.status(200).json({ exams });
+    res.status(200).json(exams);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to retrieve mock details" });
   }
 };
-
 
 module.exports = { createMockDetails, getAllMockDetails };
