@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const examCategorySchema = new mongoose.Schema({
-  examType: {
+  name: {
     type: String,
     required: true,
   },
-  examIcon: {
+  icon: {
     type: String,
     required: true,
   },

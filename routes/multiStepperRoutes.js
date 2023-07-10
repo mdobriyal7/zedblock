@@ -1,11 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const mockController = require('../controllers/multiController');
-const verifyJWT = require('../middleware/verifyJWT');
-const upload = require('../multerConfig');
+const mockController = require("../controllers/multiController");
+const verifyJWT = require("../middleware/verifyJWT");
+const parser = require("../middleware/uploadImage");
 
 
-router.post('/', verifyJWT, upload.fields([{ name: 'examIcon', maxCount: 1 }, { name: 'testIcon', maxCount: 1 }]), mockController.createMockDetails);
-router.get('/',verifyJWT, mockController.getAllMockDetails);
+router.post(
+  "/",
+  parser.fields([
+    { name: "examIcon", maxCount: 1 },
+    { name: "testIcon", maxCount: 1 },
+  ]),
+  mockController.createMockDetails
+);
 
 module.exports = router;

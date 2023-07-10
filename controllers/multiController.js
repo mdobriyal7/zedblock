@@ -6,6 +6,7 @@ const Test = require("../models/TestChoices");
 const Section = require("../models/SectionSchema");
 
 const createMockDetails = async (req, res) => {
+  console.log(req.files);
   try {
     const { examType, testType, paperType, sections } = req.body;
     const examIconPath =
@@ -19,7 +20,7 @@ const createMockDetails = async (req, res) => {
     }
 
     // Find or create ExamCategory
-    let exam = await Exam.findOne({ examType }).populate({
+    let exam = await Exam.findOne({ name: examType }).populate({
       path: "tests",
       populate: {
         path: "phases",
@@ -31,19 +32,21 @@ const createMockDetails = async (req, res) => {
 
     if (!exam) {
       // Create new ExamCategory if not found
-      exam = await Exam.create({ examType, examIcon: examIconPath });
+      exam = await Exam.create({ name: examType, icon: examIconPath });
     }
 
     let test = exam.tests.find((t) => t.name === testType);
     if (!test) {
       // Create new TestChoices if not found
-      test = await Test.create({ name: testType, testIcon: testIconPath });
+      test = await Test.create({ name: testType, icon: testIconPath });
+      exam.tests.push(test._id);
     }
 
     let phase = test.phases.find((p) => p.name === paperType);
     if (!phase) {
       // Create new ExamPhases if not found
       phase = await Phases.create({ name: paperType });
+      test.phases.push(phase._id);
     }
 
     const createdSections = [];

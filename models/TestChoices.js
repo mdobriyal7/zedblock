@@ -5,7 +5,7 @@ const testChoicesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  testIcon: {
+  icon: {
     type: String,
     required: true,
   },
