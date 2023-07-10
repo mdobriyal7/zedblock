@@ -14,4 +14,7 @@ router.post(
   mockController.createMockDetails
 );
 
+router.get("/", mockController.getAllMockDetails);
+
+
 module.exports = router;
