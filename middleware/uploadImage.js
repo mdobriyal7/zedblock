@@ -10,11 +10,11 @@ const multerFilter = (req, file, cb) => {
   }
 };
 
-// Set up multer and cloudinary for image uploading
+// Set up multer and cloudinary for image uploading 
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
   folder: "ecommerce/products",
-  allowedFormats: ["jpg", "png"],
+  allowedFormats: ["jpg", "png","svg"],
   transformation: [{ width: 500, height: 500, crop: "limit" }],
 });
 
