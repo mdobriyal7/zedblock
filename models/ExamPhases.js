@@ -5,6 +5,10 @@ const examPhasesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  icon: {
+    type: String,
+    required: true,
+  },
   uniqueSectionID: {  // Change from sectionArray to section
     type: mongoose.Schema.Types.ObjectId,
     ref: "SectionArray",

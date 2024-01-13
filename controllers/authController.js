@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 // @route POST /auth
 // @access Public
 const login = async (req, res) => {
+    console.log(req.body)
     const { email, password } = req.body
 
     if (!email || !password) {
@@ -56,7 +57,7 @@ const login = async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
     const cookies = req.cookies
-
+    console.log(cookies);
     if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
 
     const refreshToken = cookies.jwt
